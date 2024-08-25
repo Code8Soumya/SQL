@@ -1,0 +1,9 @@
+SHOW DATABASES;
+CREATE DATABASE soumya;
+USE soumya;
+SELECT DATABASE ();
+DROP DATABASE soumya;
+
+
+
+
