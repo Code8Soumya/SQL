@@ -75,10 +75,17 @@ SELECT LCASE(title) FROM books;
 -- SELECT TRIM(TRAILING '.' FROM '.....bbsr...');
 -- SELECT TRIM(BOTH '.' FROM '.....bbsr...');
 
+SELECT REPLACE(title, ' ', '->') AS title FROM books;
+SELECT author_fname AS forward, REVERSE(author_fname) AS backward FROM books;
+SELECT UPPER(CONCAT(author_fname, ' ', author_lname)) AS 'full name in caps' FROM books;
 
+SELECT
+	CONCAT(SUBSTR(title, 1, 10), '...') AS 'short title',
+    CONCAT(author_lname, ',', author_fname) AS author,
+    CONCAT(stock_quantity, ' in stock') AS quantity
+FROM books;
 
-
-
+DROP TABLE books;
 
 
 
