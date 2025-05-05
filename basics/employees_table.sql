@@ -1,6 +1,7 @@
-use mydata;
+CREATE DATABASE my_data;
+USE my_data;
 
-CREATE TABLE Employees(
+CREATE TABLE employees(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     last_name VARCHAR(100) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -9,9 +10,10 @@ CREATE TABLE Employees(
     current_status VARCHAR(200) NOT NULL DEFAULT 'employed'
 );
 
--- DESC Employees;
+DESC employees;
+SHOW COLUMNS FROM employees;
 
-INSERT INTO Employees(last_name, first_name, age)
-VALUES ('senapati', 'soumya', '35');
+INSERT INTO employees(last_name, first_name, age) VALUES('senapati', 'soumya', '35');
+SELECT * FROM employees;
 
-SELECT * FROM Employees;
+DROP DATABASE my_data;

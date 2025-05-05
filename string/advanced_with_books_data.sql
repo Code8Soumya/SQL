@@ -1,6 +1,7 @@
+CREATE DATABASE book_shop;
 USE book_shop;
 
-CREATE TABLE books (
+CREATE TABLE books(
 	book_id INT NOT NULL AUTO_INCREMENT,
 	title VARCHAR(100),
 	author_fname VARCHAR(100),
@@ -45,7 +46,7 @@ SELECT title, pages FROM books ORDER BY pages;
 SELECT title, pages FROM books ORDER BY pages ASC;
 SELECT title, pages FROM books ORDER BY pages DESC;
 SELECT title, pages FROM books ORDER BY title;
-SELECT title, author_lname, pages FROM books ORDER BY 3; -- order by the third column e.g->pages
+SELECT title, author_lname, pages FROM books ORDER BY 3;    -- order by the third column e.g -> pages
 SELECT author_lname, released_year FROM books ORDER BY author_lname, released_year;
 SELECT author_lname, released_year FROM books ORDER BY author_lname DESC, released_year ASC;
 SELECT CONCAT(author_lname, ' ', author_fname) AS author FROM books ORDER BY author;
@@ -82,6 +83,7 @@ FROM
     books
 ORDER BY author_lname;
 
+DROP DATABASE book_shop;
 
 
 

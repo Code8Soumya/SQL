@@ -1,16 +1,21 @@
+CREATE DATABASE book_shop;
 USE book_shop;
+SELECT DATABASE();
+SHOW TABLES;
 
-CREATE TABLE parent (children TINYINT UNSIGNED);
-INSERT INTO parent (children) VALUES (3);
--- INSERT INTO parent (children) VALUES (-3);
+CREATE TABLE parent(
+	children TINYINT UNSIGNED
+);
+INSERT INTO parent(children) VALUES(3);
+INSERT INTO parent(children) VALUES(-3);
 SELECT * FROM parent;
 
-CREATE TABLE products (price DECIMAL(5, 2));
-INSERT INTO products(price) VALUES (4.99),(5.026);
+CREATE TABLE products(price DECIMAL(5, 2));
+INSERT INTO products(price) VALUES(4.995), (5.026);
 SELECT * FROM products;
 
-CREATE TABLE nums (x FLOAT, y DOUBLE); -- lose precision
-INSERT INTO nums(x, y) VALUES (1.123456789, 1.123456789123456789123456789);
+CREATE TABLE nums(x FLOAT, y DOUBLE);
+INSERT INTO nums(x, y) VALUES(1.123456789, 1.123456789123456789123456789);
 SELECT * FROM nums;
 
 CREATE TABLE people(
@@ -22,16 +27,16 @@ CREATE TABLE people(
 INSERT INTO people(name, birthdate, birthtime, birthdt)
 	VALUES 
 		('Soumya', '2000-12-25', '11:00:00', '2000-12-25 11:00:00'),
-		('Sam', CURDATE(), CURTIME(), NOW());
+		('Sam', CURDATE(), CURTIME(), NOW())
+;
 SELECT 
-	birthdate, DAY(birthdate), DAYOFWEEK(birthdate), DAYOFYEAR(birthdate),
-    MONTHNAME(birthdate), YEAR(birthdt)
+	birthdate, DAY(birthdate), DAYOFWEEK(birthdate), DAYOFYEAR(birthdate), MONTHNAME(birthdate), YEAR(birthdate)
 FROM people;
 SELECT
 	name, HOUR(birthtime), MINUTE(birthdt), TIME(birthdt)
 FROM people;
-SELECT birthdate, DATE_FORMAT(birthdate, '%a %b %d') FROM people;
-SELECT birthdt, DATE_FORMAT(birthdt, 'Born On : %r') FROM people;
+SELECT birthdate, DATE_FORMAT(BirthDate, '%a %b %d') FROM people;    -- column names are case insensitive in this case
+SELECT birthdt, DATE_FORMAT(BirthDt, 'Born On : %r') FROM people;
 SELECT birthdate, DATEDIFF(CURDATE(), birthdate) FROM people;
 SELECT birthdt, DATEDIFF(CURDATE(), birthdt) FROM people;
 SELECT DATE_ADD(CURDATE(), INTERVAL 1 YEAR);
@@ -50,6 +55,8 @@ CREATE TABLE captions(
 INSERT INTO captions(text) VALUES('Who are you ?');
 UPDATE captions SET text='I love you!!!';
 SELECT * FROM captions;
+
+DROP DATABASE book_shop;
 
 
 

@@ -91,6 +91,7 @@ SELECT
     END AS genre
 FROM
     books;
+
 SELECT 
     title,
     stock_quantity,
@@ -118,6 +119,7 @@ FROM
 WHERE
     author_lname LIKE 'c%'
         OR author_lname LIKE 's%';
+
 SELECT 
     title,
     author_lname,
@@ -125,13 +127,15 @@ SELECT
         WHEN title LIKE '%stories%' THEN 'Short Stories'
         WHEN
             title LIKE '%just kids%'
-                OR title LIKE '%a heartbreaking work%'
+                OR 
+            title LIKE '%a heartbreaking work%'
         THEN
             'Memoir'
         ELSE 'Novel'
     END AS TYPE
 FROM
     books;
+
 SELECT 
     author_fname,
     author_lname,
