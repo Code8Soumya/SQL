@@ -61,83 +61,122 @@ INSERT INTO reviews(series_id, reviewer_id, rating) VALUES
     (10,5,9.9),
     (13,3,8.0),(13,4,7.2),
     (14,2,8.5),(14,3,8.9),(14,4,8.9);
-    
-SELECT title, rating 
-FROM 
-	series 
-		INNER JOIN 
-	reviews 
-ON 
-	series.id = reviews.series_id;
 
-SELECT title, ROUND(AVG(rating), 2) AS avg_rating
-FROM 
-	series
-		INNER JOIN 
-	reviews
-ON
-	series.id = reviews.series_id
-GROUP BY
-	title
-ORDER BY
-	avg_rating ASC;
-
-SELECT first_name, last_name, rating
-FROM 
-	reviewers
-		INNER JOIN
-	reviews
-ON
-	reviewers.id = reviews.reviewer_id;
-
-SELECT title AS unreviewed_series
-FROM
-	series
-		LEFT JOIN
-	reviews
-ON
-	series.id = reviews.series_id
-WHERE 
-	rating IS NULL;
-    
-SELECT genre, AVG(rating) AS avg_rating
-FROM 
-	series
-		INNER JOIN
-	reviews
-ON 
-	series.id = reviews.series_id
-GROUP BY
-	genre;
-    
-SELECT 
-	first_name,
-    last_name,
-    COUNT(rating) AS COUNT,
-    MIN(IFNULL(rating, 0)) AS MIN,
-    MAX(IFNULL(rating, 0)) AS MAX,
-    ROUND(AVG(IFNULL(rating, 0)), 1) AS AVG,
-    CASE
-		WHEN COUNT(rating) > 0 THEN 'ACTIVE'
-        ELSE 'INACTIVE'
-        END AS 'STATUS'
-FROM 
-	reviewers
-		LEFT JOIN
-	reviews
-ON 
-	reviewers.id = reviews.reviewer_id
-GROUP BY
-	first_name, last_name
-ORDER BY
-	COUNT DESC;
-    
-SELECT title, rating, CONCAT(first_name, ' ', last_name) AS reviewer
-FROM reviews
+SELECT * FROM reviews
 INNER JOIN series ON reviews.series_id = series.id
 INNER JOIN reviewers ON reviews.reviewer_id = reviewers.id;
 
-DROP DATABASE movies_data;
+CREATE VIEW full_reviews AS
+SELECT first_name, last_name, title, genre, released_year, rating FROM reviews
+INNER JOIN series ON reviews.series_id = series.id
+INNER JOIN reviewers ON reviews.reviewer_id = reviewers.id;
+
+SHOW TABLES;
+
+SELECT * FROM full_reviews;
+
+DELETE FROM full_reviews WHERE released_year = 2009;    -- does not work
+
+CREATE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year;
+
+SELECT * FROM ordered_series;
+
+INSERT INTO ordered_series(title, released_year, genre) VALUES('Money Heist', 2019, 'Drama');    -- works fine
+
+CREATE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year DESC;    -- error
+
+CREATE OR REPLACE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year DESC;
+
+ALTER VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year DESC;
+
+SELECT * FROM ordered_series;
+
+DROP VIEW ordered_series;
+
+SELECT * FROM full_reviews;
+
+SELECT 
+	title,
+    AVG(rating) AS average_rating,
+    COUNT(rating) AS reviews_count
+FROM 
+	full_reviews
+GROUP BY
+	title HAVING COUNT(rating) < 5;
+    
+SELECT 
+	title,
+    AVG(rating) AS average_rating
+FROM 
+	full_reviews
+GROUP BY
+	title WITH ROLLUP;
+    
+SELECT released_year, genre, AVG(rating) AS average_rating
+FROM full_reviews
+GROUP BY released_year, genre;
+
+SELECT released_year, genre, AVG(rating) AS average_rating
+FROM full_reviews
+GROUP BY released_year, genre WITH ROLLUP;
+
+    
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

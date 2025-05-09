@@ -1,0 +1,118 @@
+SELECT @@GLOBAL.sql_mode;
+-- ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+SELECT @@SESSION.sql_mode;
+-- ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+SELECT 3/0;
+SHOW WARNINGS;
+
+SET SESSION sql_mode = 
+'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
+
+SELECT 3/0;
+SHOW WARNINGS;
+
+CREATE DATABASE my_data;
+USE my_data;
+
+CREATE TABLE students(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	first_name VARCHAR(100),
+    mark INT
+);
+
+INSERT INTO students(first_name, mark) VALUES('Soumya', 91), ('Auro', 97);
+SELECT * FROM students;
+DESC students;
+
+INSERT INTO students(first_name, mark) VALUES('Rajat', 'no_mark');    -- error
+
+SET SESSION sql_mode =
+'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+INSERT INTO students(first_name, mark) VALUES('Rajat', 'no_mark');
+
+SELECT * FROM students;
+  
+DROP DATABASE my_data;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
